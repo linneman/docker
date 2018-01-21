@@ -39,13 +39,13 @@ if version_greater "$image_version" "$installed_version"; then
     else
       rsync_options="-rlD"
     fi
-    rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
+    # rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
 
-    for dir in config data custom_apps themes; do
-        if [ ! -d /var/www/html/"$dir" ] || directory_empty /var/www/html/"$dir"; then
-            rsync $rsync_options --include /"$dir"/ --exclude '/*' /usr/src/nextcloud/ /var/www/html/
-        fi
-    done
+    # for dir in config data custom_apps themes; do
+    #     if [ ! -d /var/www/html/"$dir" ] || directory_empty /var/www/html/"$dir"; then
+    #         rsync $rsync_options --include /"$dir"/ --exclude '/*' /usr/src/nextcloud/ /var/www/html/
+    #     fi
+    # done
 
     if [ "$installed_version" != "0.0.0~unknown" ]; then
         run_as 'php /var/www/html/occ upgrade --no-app-disable'
